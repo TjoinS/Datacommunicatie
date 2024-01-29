@@ -1,0 +1,59 @@
+Switch (Cisco)
+
+*SWITCH CONFIGURATIE*
+
+enable					|Om in de privileged exec-modus van de switch te komen.
+conf t					|Om de configuratiemodus te openen.
+logging synchronous			|Voorkomt dat de commandoprompt word onderbroken door systeemmeldingen.
+
+hostname switch1			|Veranderd de hostnaam naar switch1.
+ip domain-name				|Om een domeinnaam toe te wijzen aan de switch.
+
+line con 0				|Opent de configuratie van de consolepoort (poort 0).
+password switch1			|Veranderd het wachtwoord van de consolepoort (poort0) naar switch1.
+login					|Zorgd ervoor dat inlognaam en wachtwoord vereisd is bij verbinding met consolepoort (poort 0).
+
+enable password switch1			|Stelt switch1 als wachtwoord in voor de exec-modus (dit wachtwoord word gevraagd wanneer men enable commando uitvoert).
+
+
+
+
+*EXTERNE TOEGANG VIA PROTOCOLLEN ZOALS TELNET EN SSH*
+
+line vty 0 15				|Om alle 16 (0 t/m 15) VTY-lijnen te configureren (voor Telnet en SSH).
+password switch1			|Stelt switch1 als wachtwoord in voor toegang tot de VTY-lijnen.
+login					|Configureerd de VTY-lijnen om een inlognaam en wachtwoord te vereisen voor toegang.
+transport input telnet ssh		|Configureerd de VTY-lijnen om beide Telnet en SSH verkeer toe te staan.
+exec-timeout 15 0			|Inactiviteit van 15 minuten (eerste getal) en 0 seconden (tweede getal) zorgd voor een time-out.
+
+
+
+
+*VLAN CONFIGURATIE*
+
+(TIP! voor het configureren van de vlan's voer het commando "show vlan" uit om te kijken of de default poorten (gemarkeerd onder vlan1) 
+ GigabitEthernet of FastEthernet poorten zijn en of je dus Gi1/0/5 of Fa1/0/5 moet gebruiken om poort 5 aan te duiden.)
+
+show vlan				|Laat alle aanwezige vlan's op de switch zien inclusief de toegewezen poorten.
+
+vlan 3					|Maakt vlan 3 aan.
+name servers				|Veranderd de vlan-naam naar servers.
+interface vlan 3			|Opent de configuratie-modus van vlan 3.
+ip address 10.10.50.1 255.255.255.0	|Geeft vlan 3, 10.10.50.1 als ip adress met het subnetmasker 255.255.255.0.
+ip default-gateway 10.10.50.254		|Geeft vlan 3, 10.10.50.254 als default gateway.
+
+interface range Fa1/0/15 - 20		|Geeft aan dat de configuratie voor de poorten FastEthernet 15 tot en met 20 aangepast worden.
+switchport acces vlan 3			|Voegt de poorten FastEthernet 15 tot en met 20 toe als acces poorten aan vlan 3.
+
+
+
+
+*TRUNK CONFIGURATIE*
+
+show interface trunk			|Laat een lijst zien met alle trunk-poorten op de switch, kortom hiermee check je 
+					 of je gewenste poort succesvol als trunk-poort is geconfigureerd).
+
+interface Fa1/0/24			|Opent de configuratie van FastEthernet poort 24.
+switchport mode trunk			|Zorgd ervoor dat poort 24 geconfigureerd is staat als trunk-modus.
+switchport trunk encapsulation dot1q	|Configureerd de 802.1Q VLAN-encapsulatiemethode op poort 24 voor trunk-poort gebruik.
+switchport trunk allowed vlan 3,4,5	|Geeft aan dat vlan 3, 4 en 5 zijn toegestaan op de trunk-poort 24.
