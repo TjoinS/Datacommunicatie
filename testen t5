@@ -1,0 +1,1 @@
+print(f"The total number of invalid hashes is {invalid_hash_count}.")
