@@ -1,12 +1,1 @@
-
-while True:
-    uitvoer = input("Mag dit script worden uitgevoerd? : Doorgaan j/n?").lower()
-    if uitvoer in {"j", "ja"}:
-        print("Het script wordt voortgezet.")
-        break
-    elif uitvoer in {"n", "nee"}:
-        print("Het script wordt gestopt.")
-        exit()
-    else:
-        print("Ongeldige invoer")
-
+test 2
