@@ -1,0 +1,6 @@
+if file_size <= 102400:
+    small_files_count += 1
+elif 102400 < file_size < 204800:
+    medium_files_count += 1
+else:
+    large_files_count += 1
