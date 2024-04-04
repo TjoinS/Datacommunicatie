@@ -1,0 +1,3 @@
+T1
+Oms: in deze code word een variabel gemaakt met de string value van manifest.json
+Code: manifest_file = "manifest.json"
